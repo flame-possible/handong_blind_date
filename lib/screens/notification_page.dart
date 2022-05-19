@@ -12,6 +12,14 @@ class NotiPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("알림"),
+        actions: [
+          IconButton(
+            onPressed: () {
+            },
+            icon: Icon(Icons.settings),
+            color: Colors.black,
+          )
+        ],
       ),
       body: Column(
         children: [

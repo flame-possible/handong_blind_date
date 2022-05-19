@@ -1,3 +1,6 @@
+import 'package:final_project/providers/matching_provider.dart';
+import 'package:final_project/providers/profile_provider.dart';
+import 'package:final_project/screens/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +44,7 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color(0xffff8383),
           elevation: 0,
+          showUnselectedLabels: true,
           selectedIconTheme: IconThemeData(
             color: Colors.black,
           ),
@@ -82,9 +86,11 @@ class MyApp extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
       ),
+      // 프로바이더 설정을 위한 섹션
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider())
+          ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
+          ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
         ],
         child: Navi(),
       ),

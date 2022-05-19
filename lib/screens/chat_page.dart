@@ -12,6 +12,14 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("채팅"),
+        actions: [
+          IconButton(
+            onPressed: () {
+            },
+            icon: Icon(Icons.settings),
+            color: Colors.black,
+          )
+        ],
       ),
       body: Column(
         children: [

@@ -8,19 +8,7 @@ import 'notification_page.dart';
 import 'package:final_project/providers/bottombar_provider.dart';
 
 class Navi extends StatelessWidget {
-
   late BottomBarProvider _bottomBarProvider;
-
-  @override
-  Widget build(BuildContext context) {
-    _bottomBarProvider = Provider.of<BottomBarProvider>(context);
-
-    return Scaffold(
-      body: _navigationBody(),
-      bottomNavigationBar: _bottomNavigationBar(),
-
-    );
-  }
 
   Widget _navigationBody() {
     // switch를 통해 currentPage에 따라 네비게이션을 구동시킨다.
@@ -37,7 +25,7 @@ class Navi extends StatelessWidget {
     return Container();
   }
 
-  Widget _bottomNavigationBar(){
+  Widget _bottomNavigationBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: _bottomBarProvider.selectedIndex,
@@ -59,4 +47,11 @@ class Navi extends StatelessWidget {
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    _bottomBarProvider = Provider.of<BottomBarProvider>(context);
+
+    return Scaffold(
+        body: _navigationBody(), bottomNavigationBar: _bottomNavigationBar());
+  }
 }
