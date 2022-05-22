@@ -1,4 +1,5 @@
 import 'package:final_project/providers/naviProvider.dart';
+import 'package:final_project/screens/navigator.dart';
 import 'package:final_project/screens/signup_certification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,9 +37,10 @@ class LoginNavi extends StatelessWidget {
         return SignUp_certification();
 
       case 3:
-        return HomePage();
+        return Navi();
     }
     return Container();
   }
+
 
 }

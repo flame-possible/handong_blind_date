@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:final_project/providers/matching_provider.dart';
+import 'package:final_project/screens/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,13 @@ class HomePage extends StatelessWidget {
         title: Text("홈"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Setting()),
+              );
+            },
             icon: Icon(Icons.settings),
             color: Colors.black,
           )

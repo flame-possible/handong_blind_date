@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/screens/login_page.dart';
+import 'package:final_project/screens/signup_certification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -7,6 +8,8 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:final_project/providers/infoProvider.dart';
 import 'package:final_project/providers/naviProvider.dart';
+
+import 'navigator.dart';
 
 class SignUpPage extends StatelessWidget {
   late InfoProvider _infoProvider;
@@ -180,10 +183,24 @@ class SignUpPage extends StatelessWidget {
               });
 
               if(useremail != null && useremail.contains('handong.ac.kr')){
-                _naviProvider.selectIndex(3);
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // 파라미터 todo로 tap된 index의 아이템을 전달
+                    builder: (context) => Navi(),
+                  ),
+                );
               }
               else{
-                _naviProvider.selectIndex(2);
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // 파라미터 todo로 tap된 index의 아이템을 전달
+                    builder: (context) => SignUp_certification(),
+                  ),
+                );
               }
 
               },

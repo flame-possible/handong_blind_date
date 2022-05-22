@@ -1,16 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/screens/signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project/providers/naviProvider.dart';
+
+import 'home_page.dart';
+import 'navigator.dart';
 
 
 String? user_data = "";
 late User? user;
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  LoginPageState createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
   late NaviProvider _naviProvider;
+
+  String userInfo = "";
+  static final storage =
+  new FlutterSecureStorage();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _IDController = TextEditingController();
@@ -18,6 +32,35 @@ class LoginPage extends StatelessWidget {
 
   // String? user_data = "";
   // late User? user;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //비동기로 flutter secure storage 정보를 불러오는 작업.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+    });
+  }
+
+  _asyncMethod() async {
+    //read 함수를 통하여 key값에 맞는 정보를 불러오게 됩니다. 이때 불러오는 결과의 타입은 String 타입임을 기억해야 합니다.
+    //(데이터가 없을때는 null을 반환을 합니다.)
+    userInfo = (await storage.read(key: "login"))!;
+    print(userInfo);
+
+    //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
+    if (userInfo != null) {
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          // 파라미터 todo로 tap된 index의 아이템을 전달
+          builder: (context) => Navi(),
+        ),
+      );
+    }
+  }
 
   Future<int?> findUserByUid(String uid) async {
     // users collection에 있는 모든 user들을 users에 담음.
@@ -53,6 +96,7 @@ class LoginPage extends StatelessWidget {
     user = userCredential.user;
 
     String? user_id = user?.uid;
+    String? useremail = user?.email;
 
     final userCollectionReference = FirebaseFirestore.instance.collection("User_Data").doc(user?.uid);
 
@@ -62,11 +106,31 @@ class LoginPage extends StatelessWidget {
     print(existDoc);
     print("456");
 
+    await storage.write(
+        key: "login",
+        value: "id " +
+            useremail!);
+
     if(existDoc == 0){
-      _naviProvider.selectIndex(1);
+
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+          // 파라미터 todo로 tap된 index의 아이템을 전달
+          builder: (context) => SignUpPage(),
+          ),
+      );
     }
     else{
-      _naviProvider.selectIndex(3);
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          // 파라미터 todo로 tap된 index의 아이템을 전달
+          builder: (context) => Navi(),
+        ),
+      );
     }
 
 

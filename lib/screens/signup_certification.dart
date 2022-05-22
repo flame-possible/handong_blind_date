@@ -6,6 +6,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:final_project/providers/infoProvider.dart';
 import 'package:final_project/providers/naviProvider.dart';
 
+import 'navigator.dart';
+
 class SignUp_certification extends StatelessWidget {
   late InfoProvider _infoProvider;
   late NaviProvider _naviProvider;
@@ -61,7 +63,17 @@ class SignUp_certification extends StatelessWidget {
         height: 44,
         width: (MediaQuery.of(context).size.width) * 0.9,
         child: ElevatedButton(
-            onPressed: () {_naviProvider.selectIndex(3);},
+            onPressed: () {
+
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  // 파라미터 todo로 tap된 index의 아이템을 전달
+                  builder: (context) => Navi(),
+                ),
+              );
+            },
             child: Text('완료')),
       ),
     );

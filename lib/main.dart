@@ -17,7 +17,17 @@ import 'package:final_project/screens/signup_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
+        ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
+        ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
+        ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
+      ],
+      child: new MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -92,15 +102,7 @@ class MyApp extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
         ),
-        home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
-            ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
-            ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
-            ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
-          ],
-          child: LoginNavi(),
-        ),
+        home: new LoginPage(),
     );
   }
 }
