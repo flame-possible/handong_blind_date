@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 class SettingProvider with ChangeNotifier {
+
   //닉네임 **
   late String _nickname;
 
@@ -20,12 +21,11 @@ class SettingProvider with ChangeNotifier {
   late List<String> _imageFile;
   // 장거리 연애 가능 여부 **
   late String _longDate;
-
-
   final List<String> _longProfileDateList = ["가능해요", "힘들어요"];
+
   //MBTI
   late String _mbti;
-  final List<String> _mbtiProfileList = ["ENFP", "ENFJ", "ENTP", "ENTJ", "ESFP", "ESFJ", "ESTP", "ESTJ", "INFP", "INFJ", "INTP", "INTJ", "ISFP", "ISFJ", "ISTP", "ISTJ"];
+  final List<String> _mbtiProfileList = ["", "ENFP", "ENFJ", "ENTP", "ENTJ", "ESFP", "ESFJ", "ESTP", "ESTJ", "INFP", "INFJ", "INTP", "INTJ", "ISFP", "ISFJ", "ISTP", "ISTJ"];
 
   //성격 **
   late String _character;
@@ -40,12 +40,12 @@ class SettingProvider with ChangeNotifier {
 
   //흡연여부
   late String _cigarette;
-  final List<String> _cigaretteProfileList = ["예", "아니요", ""];
+  final List<String> _cigaretteProfileList = ["", "예", "아니요"];
 
   //음주여부
   late String _drink;
 
-  final List<String> _drinkProfileList = ["좋아해요", "가끔 마셔요", "안마셔요"];
+  final List<String> _drinkProfileList = ["", "좋아해요", "가끔 마셔요", "안마셔요"];
 
   //재학상태 **
   late String _undergraduate;
@@ -53,15 +53,15 @@ class SettingProvider with ChangeNotifier {
 
   //군필여부 **
   late String _military;
-  final List<String> _militarProfileList = ["미필", "군필(면제)"];
+  final List<String> _militarProfileList = ["미필", "군필(면제)", "해당 없음"];
 
   //학부
   late String _faculty;
-  final List<String> _facultyProfileList = ["GLS", "국제어문", "경영경제", "기계제어", "법", "커뮤니케이션", "상담심리사회복지", "생명과학", "공간환경시스템", "전산전자", "콘텐츠융합디자인", "ICT창업", "언어교육원", "창의융합교육원", "AI융합교육원", ""];
+  final List<String> _facultyProfileList = ["", "GLS", "국제어문", "경영경제", "기계제어", "법", "커뮤니케이션", "상담심리사회복지", "생명과학", "공간환경시스템", "전산전자", "콘텐츠융합디자인", "ICT창업", "언어교육원", "창의융합교육원", "AI융합교육원"];
 
   //RC
   late String _rc;
-  final List<String> _rcProfileList = ["카이퍼", "열송", "장기려", "카마이클", "손양원", "토레이", ""];
+  final List<String> _rcProfileList = ["", "카이퍼", "열송", "장기려", "카마이클", "손양원", "토레이"];
 
   //취미
   late String _hobby;
@@ -71,7 +71,7 @@ class SettingProvider with ChangeNotifier {
 
   //사랑의 언어
   late String _loveLang;
-  final List<String> _loveLangProfilList = ["인정하는 말", "함께하는 시간", "선물", "봉사", "스킨십", ""];
+  final List<String> _loveLangProfilList = ["", "인정하는 말", "함께하는 시간", "선물", "봉사", "스킨십"];
 
   //그 외
     // 결혼관
@@ -165,6 +165,8 @@ class SettingProvider with ChangeNotifier {
 
   void nicknameSet (String value) {
     _nickname = value;
+    print(_nickname);
+    notifyListeners();
   }
 
   void ageSet(String value) {
@@ -175,84 +177,100 @@ class SettingProvider with ChangeNotifier {
 
   void genderSet(String value) {
     _gender = value;
+    print(_gender);
     notifyListeners();
   }
 
   void imageFileSet(List<String> value) {
     _imageFile = value;
+    print(_imageFile);
     notifyListeners();
   }
 
   void longDateSet(String value) {
     _longDate = value;
+    print(_imageFile);
     notifyListeners();
   }
 
   void mbtiSet(String value) {
     _mbti = value;
+    print(_mbti);
     notifyListeners();
   }
 
   void characterSet(String value) {
     _character = value;
+    print(_character);
     notifyListeners();
   }
 
   void heightSet(String value) {
     _height = value;
+    print(_height);
     notifyListeners();
   }
 
   void religionSet(String value) {
     _religion = value;
+    print(_religion);
     notifyListeners();
   }
 
 
   void cigaretteSet(String value) {
     _cigarette = value;
+    print(_cigarette);
     notifyListeners();
   }
 
 
   void drinkSet(String value) {
     _drink = value;
+    print(_cigarette);
     notifyListeners();
   }
 
   void undergraduateSet(String value) {
     _undergraduate = value;
+    print(_undergraduate);
     notifyListeners();
   }
 
 
   void militarySet(String value) {
     _military = value;
+    print(_military);
     notifyListeners();
   }
 
   void facultySet(String value) {
     _faculty = value;
+    print(_military);
     notifyListeners();
   }
 
   void rcSet(String value) {
     _rc = value;
+    print(_rc);
     notifyListeners();
   }
 
   void hobbySet(String value) {
     _hobby = value;
+    print(_hobby);
     notifyListeners();
   }
 
   void groupSet(String value) {
     _group = value;
+    print(_group);
     notifyListeners();
   }
 
   void loveLangSet(String value) {
     _loveLang = value;
+    print(_loveLang);
     notifyListeners();
   }
 
