@@ -1,7 +1,9 @@
-import 'package:final_project/app.dart';
 import 'package:final_project/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'ChatListPage.dart';
+import 'CreateChatPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,18 +20,57 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xffff8383),
+          elevation: 0,
+          selectedIconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          unselectedIconTheme: IconThemeData(
+            color: Colors.white38,
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          titleSpacing: 30, //앱바 타이틀 들여쓰기
+          titleTextStyle: TextStyle(
+            color: Color(0xffff8383),
+            fontSize: 33,
+            fontWeight: FontWeight.normal,
+          ),
+          elevation: 0,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xffff8383),
+            onPrimary: const Color(0xffffffff),
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(7),
+            ),
+            minimumSize: const Size(180, 52),
+            textStyle: const TextStyle(
+              fontSize: 13,
+              color: Colors.grey,
+              fontWeight: FontWeight.w900,
+              height: 1.15,
+            ),
+          ),
+        ),
+        cardTheme: CardTheme(
+          color: Colors.white,
+          elevation: 3,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        ),
       ),
-      home: Login(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Login(),
+        '/chat_list': (context) => ChatListPage(),
+        '/create_chat': (context) => CreateChatPage(),
+      },
     );
   }
 }

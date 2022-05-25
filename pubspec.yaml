@@ -37,6 +37,9 @@ dependencies:
   firebase_auth: ^3.3.17
   firebase_core: ^1.16.0
   google_sign_in: ^5.3.0
+  sendbird_sdk: ^3.0.12
+  dash_chat: ^1.1.16
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
