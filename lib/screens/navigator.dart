@@ -1,14 +1,23 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import '../ChatListPage.dart';
 import 'chat_page.dart';
 import 'home_page.dart';
+import 'login_page.dart';
 import 'matching_page.dart';
 import 'notification_page.dart';
 import 'package:final_project/providers/bottombar_provider.dart';
+import 'package:sendbird_sdk/sendbird_sdk.dart' as sb;
 
 class Navi extends StatelessWidget {
   late BottomBarProvider _bottomBarProvider;
+
+  Future<String> loadAppId() async {
+    return await rootBundle.loadString('assets/sendbird-id.txt');
+  }
 
   Widget _navigationBody() {
     // switch를 통해 currentPage에 따라 네비게이션을 구동시킨다.
@@ -20,7 +29,8 @@ class Navi extends StatelessWidget {
         return HomePage();
 
       case 2:
-        return ChatPage();
+
+        return ChatListPage();
     }
     return Container();
   }
@@ -54,4 +64,6 @@ class Navi extends StatelessWidget {
     return Scaffold(
         body: _navigationBody(), bottomNavigationBar: _bottomNavigationBar());
   }
+
+
 }

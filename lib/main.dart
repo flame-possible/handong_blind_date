@@ -14,6 +14,9 @@ import 'package:final_project/screens/login_navi.dart';
 import 'package:final_project/screens/login_page.dart';
 import 'package:final_project/screens/signup_page.dart';
 
+import 'ChatListPage.dart';
+import 'CreateChatPage.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -29,6 +32,7 @@ Future<void> main() async {
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -48,61 +52,65 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     return MaterialApp(
-        title: 'Flutter Demo',
+      title: 'Flutter Demo',
+      routes: {
+        '/chat_list': (context) => ChatListPage(),
+        '/create_chat': (context) => CreateChatPage(),
+      },
 
-        builder: (context, child) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: child!,
-          );
-        },
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: Color(0xffff8383),
-            elevation: 0,
-            selectedIconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-            unselectedIconTheme: IconThemeData(
-              color: Colors.white38,
-            ),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Color(0xffff8383),
+          elevation: 0,
+          selectedIconTheme: IconThemeData(
+            color: Colors.black,
           ),
-          appBarTheme: const AppBarTheme(
-            color: Colors.white,
-            titleSpacing: 30, //앱바 타이틀 들여쓰기
-            titleTextStyle: TextStyle(
-              color: Color(0xffff8383),
-              fontSize: 33,
-              fontWeight: FontWeight.normal,
-            ),
-            elevation: 0,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              primary: const Color(0xffff8383),
-              onPrimary: const Color(0xffffffff),
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(7),
-              ),
-              minimumSize: const Size(180, 52),
-              textStyle: const TextStyle(
-                fontSize: 13,
-                color: Colors.blue,
-                fontWeight: FontWeight.w900,
-                height: 1.15,
-              ),
-            ),
-          ),
-          cardTheme: CardTheme(
-            color: Colors.white,
-            elevation: 3,
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          unselectedIconTheme: IconThemeData(
+            color: Colors.white38,
           ),
         ),
-        home: new LoginPage(),
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          titleSpacing: 30, //앱바 타이틀 들여쓰기
+          titleTextStyle: TextStyle(
+            color: Color(0xffff8383),
+            fontSize: 33,
+            fontWeight: FontWeight.normal,
+          ),
+          elevation: 0,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xffff8383),
+            onPrimary: const Color(0xffffffff),
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(7),
+            ),
+            minimumSize: const Size(180, 52),
+            textStyle: const TextStyle(
+              fontSize: 13,
+              color: Colors.blue,
+              fontWeight: FontWeight.w900,
+              height: 1.15,
+            ),
+          ),
+        ),
+        cardTheme: CardTheme(
+          color: Colors.white,
+          elevation: 3,
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        ),
+      ),
+      home: new LoginPage(),
     );
   }
 }

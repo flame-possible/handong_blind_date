@@ -47,6 +47,10 @@ dependencies:
   cool_alert: ^1.1.0
   flutter_secure_storage: ^5.0.2
 
+  sendbird_sdk: ^3.0.12
+  dash_chat: ^1.1.16
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,7 +74,7 @@ flutter:
   uses-material-design: true
   assets:
     - image/google.png
-    - assets/alert_lottie/
+    - assets/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
