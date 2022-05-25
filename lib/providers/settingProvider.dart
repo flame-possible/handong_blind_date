@@ -77,8 +77,33 @@ class SettingProvider with ChangeNotifier {
     // 결혼관
     // 연애관
 
+  late List<Function> _generalPropertyGetterList;
+
+  late List<Function> _otherPropertyGetterList;
+
+  final List<String> _generalPropertyList = [
+    "닉네임",
+    '나이',
+    '성별',
+    '장거리 연애',
+    '종교',
+    '키 (cm)',
+    '학적',
+    '군필 여부',
+  ];
+
+  final List<String> _otherPropertyList = [
+    "MBTI",
+    '사랑의 언어',
+    '흡연 여부',
+    '음주여부',
+    '학부',
+    'RC',
+  ];
+
   SettingProvider(){
     //TODO 파이어베이스의 값을 받아서 초기화 시키기.
+    _nickname = "기본닉네임";
     _age = "20" ;
     _gender = "남자" ;
     _imageFile = ["", "", ""];
@@ -96,70 +121,98 @@ class SettingProvider with ChangeNotifier {
     _hobby = "";
     _group = "";
     _loveLang = "";
+
+    //home에서 내 프로필을 띄우기 위한 함수(Getter) 리스트
+    _generalPropertyGetterList = [
+      nickname,
+      age,
+      gender,
+      longDate,
+      religion,
+      height,
+      undergraduate,
+      military,
+    ];
+    _otherPropertyGetterList = [
+      mbti,
+      loveLang,
+      cigarette,
+      drink,
+      faculty,
+      rc,
+    ];
   }
 
   //Getter section
-  String get nickname => _nickname;
+  String nickname() => _nickname;
 
-  String get age => _age;
+  String age() => _age;
 
-  List<String> get ageList => _ageList;
+  List<String> ageList() => _ageList;
 
-  String get gender => _gender;
+  String gender() => _gender;
 
-  List<String> get genderList => _genderList;
+  List<String> genderList() => _genderList;
 
-  List<String> get imageFile => _imageFile;
+  List<String> imageFile() => _imageFile;
 
-  String get longDate => _longDate;
+  String longDate() => _longDate;
 
-  List<String> get longProfileDateList => _longProfileDateList;
+  List<String> longProfileDateList() => _longProfileDateList;
 
-  String get mbti => _mbti;
+  String mbti() => _mbti;
 
-  List<String> get mbtiProfileList => _mbtiProfileList;
+  List<String> mbtiProfileList() => _mbtiProfileList;
 
-  String get character => _character;
+  String character() => _character;
 
-  String get height => _height;
+  String height() => _height;
 
-  List<String> get heightProfileList => _heightProfileList;
+  List<String> heightProfileList() => _heightProfileList;
 
-  String get religion => _religion;
+  String religion() => _religion;
 
-  List<String> get religionProfileList => _religionProfileList;
+  List<String> religionProfileList() => _religionProfileList;
 
-  String get cigarette => _cigarette;
+  String cigarette() => _cigarette;
 
-  List<String> get cigaretteProfileList => _cigaretteProfileList;
+  List<String> cigaretteProfileList() => _cigaretteProfileList;
 
-  String get drink => _drink;
+  String drink() => _drink;
 
-  List<String> get drinkProfileList => _drinkProfileList;
+  List<String> drinkProfileList() => _drinkProfileList;
 
-  String get undergraduate => _undergraduate;
+  String undergraduate() => _undergraduate;
 
-  List<String> get undergraduateProfileList => _undergraduateProfileList;
+  List<String> undergraduateProfileList() => _undergraduateProfileList;
 
-  String get military => _military;
+  String military() => _military;
 
-  List<String> get militarProfileList => _militarProfileList;
+  List<String> militarProfileList() => _militarProfileList;
 
-  String get faculty => _faculty;
+  String faculty() => _faculty;
 
-  List<String> get facultyProfileList => _facultyProfileList;
+  List<String> facultyProfileList() => _facultyProfileList;
 
-  String get rc => _rc;
+  String rc() => _rc;
 
-  List<String> get rcProfileList => _rcProfileList;
+  List<String> rcProfileList() => _rcProfileList;
 
-  String get hobby => _hobby;
+  String hobby() => _hobby;
 
-  String get group => _group;
+  String group() => _group;
 
-  String get loveLang => _loveLang;
+  String loveLang() => _loveLang;
 
-  List<String> get loveLangProfilList => _loveLangProfilList;
+  List<String> loveLangProfilList() => _loveLangProfilList;
+
+  List<String> generalPropertyList() => _generalPropertyList;
+
+  List<String> otherPropertyList() => _otherPropertyList;
+
+  List<Function> generalPropertyGetterList() => _generalPropertyGetterList;
+
+  List<Function> otherPropertyGetterList() => _otherPropertyGetterList;
 
   //Setter section
 

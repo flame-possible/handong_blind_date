@@ -6,6 +6,7 @@ import 'package:final_project/providers/naviProvider.dart';
 import 'package:final_project/providers/profileProvider.dart';
 import 'package:final_project/providers/settingProvider.dart';
 import 'package:final_project/screens/navigator.dart';
+import 'package:final_project/screens/navigator/setting_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ Future<void> main() async {
         ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
         ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
         ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
-        ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
         ChangeNotifierProvider<SettingProvider>(create: (_) => SettingProvider()),
+        ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
       ],
       child: new MyApp(),
     ),
