@@ -1,4 +1,3 @@
-import 'package:final_project/app.dart';
 import 'package:final_project/login.dart';
 import 'package:final_project/providers/bottombar_provider.dart';
 import 'package:final_project/providers/infoProvider.dart';
@@ -13,6 +12,9 @@ import 'package:final_project/screens/login_navi.dart';
 
 import 'package:final_project/screens/login_page.dart';
 import 'package:final_project/screens/signup_page.dart';
+
+import 'ChatListPage.dart';
+import 'CreateChatPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
