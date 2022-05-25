@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +20,7 @@ class Login extends StatelessWidget {
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-    await googleUser?.authentication;
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(

@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 import 'signup_page.dart';
-import 'package:final_project/home.dart';
 import 'package:final_project/providers/naviProvider.dart';
 
 class LoginNavi extends StatelessWidget {
