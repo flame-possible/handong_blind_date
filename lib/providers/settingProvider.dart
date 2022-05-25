@@ -3,7 +3,6 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 class SettingProvider with ChangeNotifier {
-
   //닉네임 **
   late String _nickname;
 
@@ -25,7 +24,7 @@ class SettingProvider with ChangeNotifier {
 
   //MBTI
   late String _mbti;
-  final List<String> _mbtiProfileList = ["", "ENFP", "ENFJ", "ENTP", "ENTJ", "ESFP", "ESFJ", "ESTP", "ESTJ", "INFP", "INFJ", "INTP", "INTJ", "ISFP", "ISFJ", "ISTP", "ISTJ"];
+  final List<String> _mbtiProfileList = ["선택 안함", "ENFP", "ENFJ", "ENTP", "ENTJ", "ESFP", "ESFJ", "ESTP", "ESTJ", "INFP", "INFJ", "INTP", "INTJ", "ISFP", "ISFJ", "ISTP", "ISTJ"];
 
   //성격 **
   late String _character;
@@ -40,12 +39,12 @@ class SettingProvider with ChangeNotifier {
 
   //흡연여부
   late String _cigarette;
-  final List<String> _cigaretteProfileList = ["", "예", "아니요"];
+  final List<String> _cigaretteProfileList = ["선택 안함", "예", "아니요"];
 
   //음주여부
   late String _drink;
 
-  final List<String> _drinkProfileList = ["", "좋아해요", "가끔 마셔요", "안마셔요"];
+  final List<String> _drinkProfileList = ["선택 안함", "좋아해요", "가끔 마셔요", "안마셔요"];
 
   //재학상태 **
   late String _undergraduate;
@@ -57,11 +56,11 @@ class SettingProvider with ChangeNotifier {
 
   //학부
   late String _faculty;
-  final List<String> _facultyProfileList = ["", "GLS", "국제어문", "경영경제", "기계제어", "법", "커뮤니케이션", "상담심리사회복지", "생명과학", "공간환경시스템", "전산전자", "콘텐츠융합디자인", "ICT창업", "언어교육원", "창의융합교육원", "AI융합교육원"];
+  final List<String> _facultyProfileList = ["선택 안함", "GLS", "국제어문", "경영경제", "기계제어", "법", "커뮤니케이션", "상담심리사회복지", "생명과학", "공간환경시스템", "전산전자", "콘텐츠융합디자인", "ICT창업", "언어교육원", "창의융합교육원", "AI융합교육원"];
 
   //RC
   late String _rc;
-  final List<String> _rcProfileList = ["", "카이퍼", "열송", "장기려", "카마이클", "손양원", "토레이"];
+  final List<String> _rcProfileList = ["선택 안함", "카이퍼", "열송", "장기려", "카마이클", "손양원", "토레이"];
 
   //취미
   late String _hobby;
@@ -71,7 +70,7 @@ class SettingProvider with ChangeNotifier {
 
   //사랑의 언어
   late String _loveLang;
-  final List<String> _loveLangProfilList = ["", "인정하는 말", "함께하는 시간", "선물", "봉사", "스킨십"];
+  final List<String> _loveLangProfilList = ["선택 안함", "인정하는 말", "함께하는 시간", "선물", "봉사", "스킨십"];
 
   //그 외
     // 결혼관
@@ -109,18 +108,18 @@ class SettingProvider with ChangeNotifier {
     _imageFile = ["", "", ""];
     _longDate = "가능해요" ;
     _mbti = "ENFP";
-    _character = "";
+    _character = "입력 안함";
     _height = "176~180";
     _religion = "개신교";
-    _cigarette = "";
-    _drink = "";
+    _cigarette = "선택 안함";
+    _drink = "선택 안함";
     _undergraduate = "재학";
     _military = "미필";
-    _faculty = "";
-    _rc = "";
-    _hobby = "";
-    _group = "";
-    _loveLang = "";
+    _faculty = "선택 안함";
+    _rc = "선택 안함";
+    _hobby = "입력 안함";
+    _group = "입력 안함";
+    _loveLang = "선택 안함";
 
     //home에서 내 프로필을 띄우기 위한 함수(Getter) 리스트
     _generalPropertyGetterList = [
@@ -324,6 +323,27 @@ class SettingProvider with ChangeNotifier {
   void loveLangSet(String value) {
     _loveLang = value;
     print(_loveLang);
+    notifyListeners();
+  }
+
+  /******** 홈 - 내프로필 섹션을 위한 변수 *********/
+  bool _seeDetailProfile = false;
+  int _displayedGeneralItemNum = 2;
+  int _displayedOthersItemNum = 2;
+
+  int get displayedGeneralItemNum =>  _displayedGeneralItemNum;
+  int get displayedOthersItemNum =>  _displayedOthersItemNum;
+
+  void seeDetailProfile() {
+    _seeDetailProfile = !(_seeDetailProfile);
+
+    if (_seeDetailProfile == false) {
+      _displayedGeneralItemNum = 2;
+      _displayedOthersItemNum = 2;
+    } else {
+      _displayedGeneralItemNum = _generalPropertyList.length -1; // 닉네임을 제하고 보여주므로
+      _displayedOthersItemNum = _otherPropertyList.length;
+    }
     notifyListeners();
   }
 
