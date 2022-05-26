@@ -1,5 +1,7 @@
+import 'package:final_project/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart';
 
 import 'ChatroomPage.dart';
@@ -12,8 +14,17 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
+  late ProfileProvider _profileProvider;
+
+
   @override
   Widget build(BuildContext context) {
+    _profileProvider = Provider.of<ProfileProvider>(context);
+    SendbirdSdk().updateCurrentUserInfo(
+      nickname: _profileProvider.propertyGeneral[0]['answer'],
+      fileInfo: FileInfo.fromUrl(url: _profileProvider.profileImage.first),
+    );
+
     return Scaffold(
       appBar: navigationBar(),
       body: body(context),
@@ -119,7 +130,7 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
               GroupChannel channel = channels[index];
               Member member = channel.members.firstWhere(
                   (element) =>
-                      element.userId != SendbirdSdk().currentUser?.userId,
+                      !element.isCurrentUser,
                   orElse: () => Member(nickname: '', userId: '')); // 대화 상대
               bool noMessages = channel.lastMessage == null ? true : false;
               int? lastMessageTime = channel.lastMessage?.createdAt;
@@ -163,10 +174,10 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
                                       lastMessageTime!))
                                   ? Text(DateFormat("MM-dd").format(
                                       DateTime.fromMillisecondsSinceEpoch(
-                                          lastMessageTime!)))
+                                          lastMessageTime)))
                                   : Text(DateFormat("h:mm a").format(
                                       DateTime.fromMillisecondsSinceEpoch(
-                                          lastMessageTime!))),
+                                          lastMessageTime))),
                               Text(channel.lastMessage?.message ?? ''),
                             ],
                           ),
