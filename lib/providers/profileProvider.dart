@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'settingProvider.dart';
+import 'profileInfoProvider.dart';
 
 /// 프로필의 각 속성별 값을 앱 내에 저장하도록 하는 것은 좋지 않다.
 /// 로컬 저장소에 값을 저장해놓는 방법을 구현해야하기 떼문이다.
@@ -10,7 +10,7 @@ import 'settingProvider.dart';
 /// 프로필을 수정할 때에도 마찬가지로, 프로파이더 내의 변수를 이용하며,
 /// 사용자가 '저장'버튼을 누를 경우에 DB에 값을 Update 하도록 한다.
 class ProfileProvider with ChangeNotifier {
-  late SettingProvider _settingProvider;
+  late ProfileInfoProvider _settingProvider;
 
   // 이 프로바이더가 처음 생성되었을 때, firebase db로 부터 각종 데이터를 받아와 각 변수들을 초기화 시켜야 한다.
   ProfileProvider() {

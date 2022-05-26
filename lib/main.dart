@@ -2,9 +2,10 @@ import 'package:final_project/app.dart';
 import 'package:final_project/login.dart';
 import 'package:final_project/providers/bottombarProvider.dart';
 import 'package:final_project/providers/infoProvider.dart';
+import 'package:final_project/providers/matchingInfoProvider.dart';
 import 'package:final_project/providers/naviProvider.dart';
 import 'package:final_project/providers/profileProvider.dart';
-import 'package:final_project/providers/settingProvider.dart';
+import 'package:final_project/providers/profileInfoProvider.dart';
 import 'package:final_project/screens/navigator.dart';
 import 'package:final_project/screens/navigator/setting_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,8 +27,9 @@ Future<void> main() async {
         ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
         ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
         ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
-        ChangeNotifierProvider<SettingProvider>(create: (_) => SettingProvider()),
+        ChangeNotifierProvider<ProfileInfoProvider>(create: (_) => ProfileInfoProvider()),
         ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider<MatchingInfoProvider>(create: (_) => MatchingInfoProvider()),
       ],
       child: new MyApp(),
     ),

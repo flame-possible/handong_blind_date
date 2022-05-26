@@ -1,5 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:final_project/providers/settingProvider.dart';
+import 'package:final_project/providers/profileInfoProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,14 +14,16 @@ import 'package:provider/provider.dart';
 ///   이때, 필수인 정보가 입력되지 않았다면 (settingProvider 내에 값이 null 인지 확인)
 ///   설정 페이지로 이동해 정보를 입력하도록 한다.
 
+// String
+
 class MyProfile extends StatelessWidget {
   MyProfile({Key? key}) : super(key: key);
 
-  late SettingProvider _settingProvider;
+  late ProfileInfoProvider _profileInfoProvider;
 
   @override
   Widget build(BuildContext context) {
-    _settingProvider = Provider.of<SettingProvider>(context);
+    _profileInfoProvider = Provider.of<ProfileInfoProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -62,7 +64,7 @@ class MyProfile extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
               width: MediaQuery.of(context).size.width * (85 / 100),
               decoration: BoxDecoration(
-                color: Color(0xffF8F8F8),
+                color: const Color(0xffF8F8F8),
                 boxShadow: const [
                   BoxShadow(
                       color: Colors.grey,
@@ -142,41 +144,41 @@ class MyProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sectionTitle("기본정보"),
-                  shortCard("닉네임", "닉네임을 입력하세요",_settingProvider.nicknameSet),
-                  selectCard("나이", 1, "나이를 선택해주세요", _settingProvider.ageList(),
-                      _settingProvider.ageSet),
-                  selectCard("성별", 1, "성별을 선택해주세요", _settingProvider.genderList(),
-                      _settingProvider.genderSet),
+                  shortCard("닉네임", "닉네임을 입력하세요",_profileInfoProvider.nicknameSet),
+                  selectCard("나이", 1, "나이를 선택해주세요", _profileInfoProvider.ageList(),
+                      _profileInfoProvider.ageSet),
+                  selectCard("성별", 1, "성별을 선택해주세요", _profileInfoProvider.genderList(),
+                      _profileInfoProvider.genderSet),
                   selectCard(
                       "장거리 연애",
                       1,
                       "장거리 연애 가능여부를\n선택해주세요",
-                      _settingProvider.longProfileDateList(),
-                      _settingProvider.longDateSet),
+                      _profileInfoProvider.longProfileDateList(),
+                      _profileInfoProvider.longDateSet),
                   selectCard(
                       "종교",
                       1,
                       "종교를 선택해주세요",
-                      _settingProvider.religionProfileList(),
-                      _settingProvider.religionSet),
+                      _profileInfoProvider.religionProfileList(),
+                      _profileInfoProvider.religionSet),
                   selectCard(
                       "키 (cm)",
                       1,
                       "키를 선택해주세요",
-                      _settingProvider.heightProfileList(),
-                      _settingProvider.heightSet),
+                      _profileInfoProvider.heightProfileList(),
+                      _profileInfoProvider.heightSet),
                   selectCard(
                       "학적",
                       1,
                       "학적을 선택해주세요",
-                      _settingProvider.undergraduateProfileList(),
-                      _settingProvider.undergraduateSet),
+                      _profileInfoProvider.undergraduateProfileList(),
+                      _profileInfoProvider.undergraduateSet),
                   selectCard(
                       "군필 여부",
                       1,
                       "군필 여부를 선택해주세요",
-                      _settingProvider.militarProfileList(),
-                      _settingProvider.militarySet),
+                      _profileInfoProvider.militarProfileList(),
+                      _profileInfoProvider.militarySet),
                 ],
               ),
             ),
@@ -203,12 +205,12 @@ class MyProfile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sectionTitle("기타 정보"),
-                  selectCard("MBTI", 0, "MBTI를 선택해주세요", _settingProvider.mbtiProfileList(), _settingProvider.mbtiSet),
-                  selectCard("사랑의 언어", 0, "사랑의 언어를 선택해주세요", _settingProvider.loveLangProfilList(), _settingProvider.loveLangSet),
-                  selectCard("흡연 여부", 0, "흡연 여부를 선택해주세요", _settingProvider.cigaretteProfileList(), _settingProvider.characterSet),
-                  selectCard("음주 여부", 0, "음주 여부를 선택해주세요", _settingProvider.drinkProfileList(), _settingProvider.drinkSet),
-                  selectCard("학부", 0, "소속 학부를 선택해주세요", _settingProvider.facultyProfileList(), _settingProvider.facultySet),
-                  selectCard("RC", 0, "소속 RC를 선택해주세요", _settingProvider.rcProfileList(), _settingProvider.rcSet),
+                  selectCard("MBTI", 0, "MBTI를 선택해주세요", _profileInfoProvider.mbtiProfileList(), _profileInfoProvider.mbtiSet),
+                  selectCard("사랑의 언어", 0, "사랑의 언어를 선택해주세요", _profileInfoProvider.loveLangProfilList(), _profileInfoProvider.loveLangSet),
+                  selectCard("흡연 여부", 0, "흡연 여부를 선택해주세요", _profileInfoProvider.cigaretteProfileList(), _profileInfoProvider.characterSet),
+                  selectCard("음주 여부", 0, "음주 여부를 선택해주세요", _profileInfoProvider.drinkProfileList(), _profileInfoProvider.drinkSet),
+                  selectCard("학부", 0, "소속 학부를 선택해주세요", _profileInfoProvider.facultyProfileList(), _profileInfoProvider.facultySet),
+                  selectCard("RC", 0, "소속 RC를 선택해주세요", _profileInfoProvider.rcProfileList(), _profileInfoProvider.rcSet),
                 ],
               ),
             )

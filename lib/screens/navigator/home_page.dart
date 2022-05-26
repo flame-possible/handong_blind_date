@@ -7,13 +7,13 @@ import 'package:provider/provider.dart';
 import 'package:final_project/providers/bottombarProvider.dart';
 
 import '../../providers/profileProvider.dart';
-import '../../providers/settingProvider.dart';
+import '../../providers/profileInfoProvider.dart';
 import 'matching_page.dart';
 
 class HomePage extends StatelessWidget {
   late BottomBarProvider _bottomBarProvider;
   late ProfileProvider _profileProvider;
-  late SettingProvider _settingProvider;
+  late ProfileInfoProvider _settingProvider;
 
   HomePage({Key? key}) : super(key: key);
 
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     _bottomBarProvider = Provider.of<BottomBarProvider>(context);
     _profileProvider = Provider.of<ProfileProvider>(context);
-    _settingProvider = Provider.of<SettingProvider>(context);
+    _settingProvider = Provider.of<ProfileInfoProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                       MediaQuery.of(context).size.width * (8 / 100),
                       MediaQuery.of(context).size.width * (8 / 100)),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF5F5F5),
+                    color: const Color(0xffF8F8F8),
                     boxShadow: const [
                       BoxShadow(
                           color: Colors.grey,
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      //기본 정보를 위한 칸
+                      //기본 정보를 위한 칸 (필수정보)
                       ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: _settingProvider.displayedGeneralItemNum,
@@ -171,7 +171,7 @@ class HomePage extends StatelessWidget {
                         height: 32,
                         color: Colors.cyan,
                       ),
-                      //선택 정보를 위한 칸
+                      //선택 정보를 위한 칸 (비필수 정보)
                       ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: _settingProvider.displayedOthersItemNum,
