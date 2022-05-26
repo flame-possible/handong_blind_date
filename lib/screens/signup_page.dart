@@ -155,58 +155,57 @@ class SignUpPage extends StatelessWidget {
                     );
                   }).toList(),
                 )),
-            // SizedBox(height: 34),
-            SizedBox(
-              height: 44,
-              width: (MediaQuery.of(context).size.width) * 0.9,
-              child: ElevatedButton(
-                  onPressed: () {
-
-                    String? useremail = user_?.email;
-                    final userCollectionReference =
-                    FirebaseFirestore.instance.collection("User_Data").doc(user_?.uid);
-
-                    var timeZoneOffset = DateTime.now().timeZoneOffset.inMilliseconds;
-                    var localTimestamp = (DateTime.now().millisecondsSinceEpoch + timeZoneOffset);
-
-                    userCollectionReference.set({
-                      "Uid": user_?.uid,
-                      "Name":  _infoProvider.nameController.text,
-                      "Nickname": _infoProvider.nickController.text,
-                      "Birth_date": _infoProvider.birthday,
-                      "Student_number": _infoProvider.StudentIDController.text,
-                      "Sex": _infoProvider.genderValue,
-                      "Phone_num": _infoProvider.phoneNumController.text,
-                      "Status": _infoProvider.stateValue,
-                      "Timestamp": localTimestamp
-                    });
-
-                    if(useremail != null && useremail.contains('handong.ac.kr')){
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          // 파라미터 todo로 tap된 index의 아이템을 전달
-                          builder: (context) => Navi(),
-                        ),
-                      );
-                    }
-                    else{
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          // 파라미터 todo로 tap된 index의 아이템을 전달
-                          builder: (context) => SignUp_certification(),
-                        ),
-                      );
-                    }
-
-                  },
-                  child: Text('완료')),
-            ),
-            SizedBox(height: 104),
+            SizedBox(height: 34),
           ]),
+      bottomNavigationBar: SizedBox(
+        height: 44,
+        width: (MediaQuery.of(context).size.width) * 0.9,
+        child: ElevatedButton(
+            onPressed: () {
+
+              String? useremail = user?.email;
+              final userCollectionReference =
+              FirebaseFirestore.instance.collection("User_Data").doc(user?.uid);
+
+              var timeZoneOffset = DateTime.now().timeZoneOffset.inMilliseconds;
+              var localTimestamp = (DateTime.now().millisecondsSinceEpoch + timeZoneOffset);
+
+              userCollectionReference.set({
+                "Uid": user?.uid,
+               "Name":  _infoProvider.nameController.text,
+                "Nickname": _infoProvider.nickController.text,
+                "Birth_date": _infoProvider.birthday,
+                "Student_number": _infoProvider.StudentIDController.text,
+                "Sex": _infoProvider.genderValue,
+                "Phone_num": _infoProvider.phoneNumController.text,
+                "Status": _infoProvider.stateValue,
+                "Timestamp": localTimestamp
+              });
+
+              if(useremail != null && useremail.contains('handong.ac.kr')){
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // 파라미터 todo로 tap된 index의 아이템을 전달
+                    builder: (context) => Navi(),
+                  ),
+                );
+              }
+              else{
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // 파라미터 todo로 tap된 index의 아이템을 전달
+                    builder: (context) => SignUp_certification(),
+                  ),
+                );
+              }
+
+              },
+            child: Text('완료')),
+      ),
     );
   }
 

@@ -58,19 +58,24 @@ class SignUp_certification extends StatelessWidget {
                       child: Text("Select File")))
             ]),
             SizedBox(height: 34),
-            SizedBox(
-              height: 44,
-              width: (MediaQuery.of(context).size.width) * 0.9,
-              child: ElevatedButton(
-                  onPressed: () {
-
-                    Route route = MaterialPageRoute(builder: (context) => Navi());
-                    Navigator.pushReplacement(context, route);
-                  },
-                  child: Text('완료')),
-            ),
-            SizedBox(height: 34),
           ]),
+      bottomNavigationBar: SizedBox(
+        height: 44,
+        width: (MediaQuery.of(context).size.width) * 0.9,
+        child: ElevatedButton(
+            onPressed: () {
+
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  // 파라미터 todo로 tap된 index의 아이템을 전달
+                  builder: (context) => Navi(),
+                ),
+              );
+            },
+            child: Text('완료')),
+      ),
     );
   }
 

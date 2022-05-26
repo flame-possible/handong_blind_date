@@ -1,23 +1,22 @@
-
-import 'dart:async';
-
+import 'package:final_project/app.dart';
 import 'package:final_project/login.dart';
-import 'package:final_project/providers/bottombar_provider.dart';
+import 'package:final_project/providers/bottombarProvider.dart';
 import 'package:final_project/providers/infoProvider.dart';
+import 'package:final_project/providers/matchingInfoProvider.dart';
 import 'package:final_project/providers/naviProvider.dart';
-import 'package:final_project/providers/profile_provider.dart';
+import 'package:final_project/providers/profileProvider.dart';
+import 'package:final_project/providers/settingProvider.dart';
+import 'package:final_project/screens/navigator.dart';
+import 'package:final_project/screens/navigator/setting_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project/screens/login_navi.dart';
-
+import 'package:final_project/providers/matchingInfoProvider.dart';
 import 'package:final_project/screens/login_page.dart';
 import 'package:final_project/screens/signup_page.dart';
-
-import 'ChatListPage.dart';
-import 'CreateChatPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,13 +27,14 @@ Future<void> main() async {
         ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
         ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
         ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
+        ChangeNotifierProvider<SettingProvider>(create: (_) => SettingProvider()),
         ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider<MatchingInfoProvider>(create: (_) => MatchingInfoProvider()),
       ],
       child: new MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -55,10 +55,6 @@ class MyApp extends StatelessWidget {
     ));
     return MaterialApp(
       title: 'Flutter Demo',
-      routes: {
-        '/chat_list': (context) => ChatListPage(),
-        '/create_chat': (context) => CreateChatPage(),
-      },
 
       builder: (context, child) {
         return MediaQuery(
@@ -112,7 +108,8 @@ class MyApp extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
       ),
-      home: new LoginPage(),
+      home: new Navi(),
     );
   }
 }
+

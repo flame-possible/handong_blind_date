@@ -2,22 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/screens/signup_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project/providers/naviProvider.dart';
 
-import 'home_page.dart';
+import 'navigator/home_page.dart';
 import 'navigator.dart';
-import 'package:sendbird_sdk/sendbird_sdk.dart' as sb;
 
 
 String? user_data = "";
-late User? user_;
-
-var uid;
-String? nickname;
+late User? user;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -46,10 +41,6 @@ class LoginPageState extends State<LoginPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
     });
-  }
-
-  Future<String> loadAppId() async {
-    return await rootBundle.loadString('assets/sendbird-id.txt');
   }
 
   _asyncMethod() async {
@@ -102,12 +93,12 @@ class LoginPageState extends State<LoginPage> {
 
     // Once signed in, return the UserCredential
     userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-    user_ = userCredential.user;
+    user = userCredential.user;
 
-    String? user_id = user_?.uid;
-    String? useremail = user_?.email;
+    String? user_id = user?.uid;
+    String? useremail = user?.email;
 
-    final userCollectionReference = FirebaseFirestore.instance.collection("User_Data").doc(user_?.uid);
+    final userCollectionReference = FirebaseFirestore.instance.collection("User_Data").doc(user?.uid);
 
     int? existDoc = await findUserByUid(user_id!) as int?;
 
@@ -120,44 +111,27 @@ class LoginPageState extends State<LoginPage> {
         value: "id " +
             useremail!);
 
-
-
     if(existDoc == 0){
-
-      Route route = MaterialPageRoute(builder: (context) => SignUpPage());
-      connect(user_id).then((user) {
-        Navigator.pushReplacement(context, route);
-      }).catchError((error) {
-        print('login_view: _signInButton: ERROR: $error');
-      });
+      print("여기1");
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+          // 파라미터 todo로 tap된 index의 아이템을 전달
+          builder: (context) => SignUpPage(),
+          ),
+      );
     }
     else{
-      Route route = MaterialPageRoute(builder: (context) => Navi());
-      connect(user_id).then((user) {
-        Navigator.pushReplacement(context, route);
-        }).catchError((error) {
-          print('login_view: _signInButton: ERROR: $error');
-      });
-      // Navigator.pop(context);
-      // Navigator.Replace(
-      //   context,
-      //   MaterialPageRoute(
-      //     // 파라미터 todo로 tap된 index의 아이템을 전달
-      //     builder: (context) => Navi(),
-      //   ),
-      // );
-    // connect(user_id).then((user) {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       // 파라미터 todo로 tap된 index의 아이템을 전달
-    //       builder: (context) => Navi(),
-    //     ),
-    //   );
-    // }).catchError((error) {
-    //   print('login_view: _signInButton: ERROR: $error');
-    // });
-
+      print("여기");
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          // 파라미터 todo로 tap된 index의 아이템을 전달
+          builder: (context) => Navi(),
+        ),
+      );
     }
 
 
@@ -200,7 +174,6 @@ class LoginPageState extends State<LoginPage> {
             child: ElevatedButton(
               child: Text('Sign In With Google'),
               onPressed: () {
-
                 signInWithGoogle();
               },
             ),
@@ -244,18 +217,5 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-
-  Future<sb.User> connect(String userId) async {
-    // Init Sendbird SDK and connect with current user id
-    try {
-      final sendbird =
-      sb.SendbirdSdk(appId: await loadAppId());
-      final user = await sendbird.connect(userId);
-      return user;
-    } catch (e) {
-      print('login_view: connect: ERROR: $e');
-      rethrow;
-    }
-  }
 
 }
