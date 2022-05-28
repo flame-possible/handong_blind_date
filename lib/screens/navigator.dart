@@ -4,13 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../ChatListPage.dart';
-import 'chat_page.dart';
-import 'home_page.dart';
 import 'login_page.dart';
-import 'matching_page.dart';
-import 'notification_page.dart';
-import 'package:final_project/providers/bottombar_provider.dart';
+import 'package:final_project/providers/bottombarProvider.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart' as sb;
+
+import 'navigator/home_page.dart';
+import 'navigator/notification_page.dart';
 
 class Navi extends StatelessWidget {
   late BottomBarProvider _bottomBarProvider;

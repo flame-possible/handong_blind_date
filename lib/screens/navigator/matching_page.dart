@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:swipable_stack/swipable_stack.dart';
-import 'package:final_project/providers/matching_provider.dart';
+
+import '../../providers/matchingProvider.dart';
 
 class MatchingPage extends StatelessWidget {
   MatchingPage({Key? key}) : super(key: key);

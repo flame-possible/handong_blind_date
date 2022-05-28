@@ -4,7 +4,6 @@ import 'package:final_project/screens/signup_certification.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home_page.dart';
 import 'login_page.dart';
 import 'signup_page.dart';
 import 'package:final_project/providers/naviProvider.dart';

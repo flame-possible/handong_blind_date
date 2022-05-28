@@ -1,11 +1,14 @@
 
-import 'dart:async';
-
 import 'package:final_project/login.dart';
-import 'package:final_project/providers/bottombar_provider.dart';
+import 'package:final_project/providers/bottombarProvider.dart';
 import 'package:final_project/providers/infoProvider.dart';
+import 'package:final_project/providers/matchingInfoProvider.dart';
 import 'package:final_project/providers/naviProvider.dart';
-import 'package:final_project/providers/profile_provider.dart';
+import 'package:final_project/providers/profileProvider.dart';
+import 'package:final_project/providers/profileInfoProvider.dart';
+import 'package:final_project/screens/navigator.dart';
+import 'package:final_project/screens/navigator/setting_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -28,13 +31,14 @@ Future<void> main() async {
         ChangeNotifierProvider<InfoProvider>(create: (_) => InfoProvider()),
         ChangeNotifierProvider<NaviProvider>(create: (_) => NaviProvider()),
         ChangeNotifierProvider<BottomBarProvider>(create: (_) => BottomBarProvider()),
+        ChangeNotifierProvider<ProfileInfoProvider>(create: (_) => ProfileInfoProvider()),
         ChangeNotifierProvider<ProfileProvider>(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider<MatchingInfoProvider>(create: (_) => MatchingInfoProvider()),
       ],
       child: new MyApp(),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

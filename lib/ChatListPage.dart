@@ -1,4 +1,4 @@
-import 'package:final_project/providers/profile_provider.dart';
+import 'package:final_project/providers/profileProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

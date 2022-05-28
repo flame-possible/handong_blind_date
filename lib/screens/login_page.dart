@@ -8,7 +8,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project/providers/naviProvider.dart';
 
-import 'home_page.dart';
 import 'navigator.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart' as sb;
 

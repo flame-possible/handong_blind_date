@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/screens/login_page.dart';
 import 'package:final_project/screens/signup_certification.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -155,22 +156,22 @@ class SignUpPage extends StatelessWidget {
                     );
                   }).toList(),
                 )),
-            // SizedBox(height: 34),
+            SizedBox(height: 34),
             SizedBox(
               height: 44,
               width: (MediaQuery.of(context).size.width) * 0.9,
               child: ElevatedButton(
                   onPressed: () {
 
-                    String? useremail = user_?.email;
+                    String? useremail = FirebaseAuth.instance.currentUser?.email;
                     final userCollectionReference =
-                    FirebaseFirestore.instance.collection("User_Data").doc(user_?.uid);
+                    FirebaseFirestore.instance.collection("User_Data").doc(FirebaseAuth.instance.currentUser?.uid);
 
                     var timeZoneOffset = DateTime.now().timeZoneOffset.inMilliseconds;
                     var localTimestamp = (DateTime.now().millisecondsSinceEpoch + timeZoneOffset);
 
                     userCollectionReference.set({
-                      "Uid": user_?.uid,
+                      "Uid": FirebaseAuth.instance.currentUser?.uid,
                       "Name":  _infoProvider.nameController.text,
                       "Nickname": _infoProvider.nickController.text,
                       "Birth_date": _infoProvider.birthday,
@@ -178,7 +179,19 @@ class SignUpPage extends StatelessWidget {
                       "Sex": _infoProvider.genderValue,
                       "Phone_num": _infoProvider.phoneNumController.text,
                       "Status": _infoProvider.stateValue,
-                      "Timestamp": localTimestamp
+                      "Timestamp": localTimestamp,
+                      'Age': '',
+                      'LongDate' : '',
+                      'Mbti' : '',
+                      'Height': '',
+                      'Religion': '',
+                      'Cigarette': '',
+                      'Drink': '',
+                      'Undergraduate': '',
+                      'Military': '',
+                      'Faculty': '',
+                      'Rc': '',
+                      'LoveLang': '',
                     });
 
                     if(useremail != null && useremail.contains('handong.ac.kr')){
@@ -205,7 +218,7 @@ class SignUpPage extends StatelessWidget {
                   },
                   child: Text('완료')),
             ),
-            SizedBox(height: 104),
+            SizedBox(height: 80),
           ]),
     );
   }

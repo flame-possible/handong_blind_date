@@ -64,8 +64,14 @@ class SignUp_certification extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {
 
-                    Route route = MaterialPageRoute(builder: (context) => Navi());
-                    Navigator.pushReplacement(context, route);
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        // 파라미터 todo로 tap된 index의 아이템을 전달
+                        builder: (context) => Navi(),
+                      ),
+                    );
                   },
                   child: Text('완료')),
             ),

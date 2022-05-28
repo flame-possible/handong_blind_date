@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'profileInfoProvider.dart';
 
 /// 프로필의 각 속성별 값을 앱 내에 저장하도록 하는 것은 좋지 않다.
 /// 로컬 저장소에 값을 저장해놓는 방법을 구현해야하기 떼문이다.
@@ -8,6 +10,8 @@ import 'package:flutter/material.dart';
 /// 프로필을 수정할 때에도 마찬가지로, 프로파이더 내의 변수를 이용하며,
 /// 사용자가 '저장'버튼을 누를 경우에 DB에 값을 Update 하도록 한다.
 class ProfileProvider with ChangeNotifier {
+  late ProfileInfoProvider _settingProvider;
+
   // 이 프로바이더가 처음 생성되었을 때, firebase db로 부터 각종 데이터를 받아와 각 변수들을 초기화 시켜야 한다.
   ProfileProvider() {
     getProfileImage();
@@ -48,16 +52,42 @@ class ProfileProvider with ChangeNotifier {
   List<String> get profileImage => _profileImage;
 
   // 1. 유저 기본 정보
-  List<Map<String, dynamic>> _propertyGeneral = [
+  late List<Map<String, dynamic>> _propertyGeneral = [
     {
       'property': "닉네임",
-      'question': "당신을 표현하는 닉네임은 무엇인가요?",
-      'answer': "시그널보내",
+      'answer': "싫다네",
     },
     {
-      'property': "일반속성1",
-      'question': "일반속성1은 무엇인가요?",
-      'answer': "일반예시1",
+      'property': "나이",
+      'answer': "",
+    },
+    {
+      'property': "성별",
+      'answer': "",
+    },
+    {
+      'property': "나이",
+      'answer': "",
+    },
+    {
+      'property': "장거리 연애",
+      'answer': "",
+    },
+    {
+      'property': "종교",
+      'answer': "",
+    },
+    {
+      'property': "키 (cm) ",
+      'answer': "",
+    },
+    {
+      'property': "학적",
+      'answer': "",
+    },
+    {
+      'property': "군필 여부",
+      'answer': "",
     }
   ];
 
@@ -114,7 +144,6 @@ class ProfileProvider with ChangeNotifier {
       'question': "서술속성1은 무엇인가요?",
       'answer': "서술예시1",
     },
-
   ];
 
   List<Map<String, dynamic>> get propertyGeneral => _propertyGeneral;
