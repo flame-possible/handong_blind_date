@@ -1,3 +1,4 @@
+
 assets/sendbird-id.txt
 # Miscellaneous
 *.class
@@ -32,6 +33,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+assets/sendbird-id.txt
 
 # Web related
 lib/generated_plugin_registrant.dart

@@ -7,6 +7,7 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 
 import '../../providers/matchingProvider.dart';
+import '../login_page.dart';
 import 'home_page.dart';
 
 class MatchingPage extends StatelessWidget {
@@ -141,7 +142,7 @@ class MatchingPage extends StatelessWidget {
                           .collection('User_Data')
                           .doc(FirebaseAuth.instance.currentUser?.uid);
                       docref.set(data, SetOptions(merge: true));
-
+                      find_partner_chat();
 
                       CoolAlert.show(
                         context: context,
@@ -283,5 +284,29 @@ class MatchingPage extends StatelessWidget {
     );
   }
 
+  Future find_partner_chat() async{
+
+    List<List<String>> temp_partners_like = [];
+
+    for(int i = 0; i < Likeusers.length; i++){
+
+      DocumentReference docref =
+      await FirebaseFirestore.instance.collection('User_Data').doc(Likeusers[i]);
+      await docref.get().then((DocumentSnapshot documentSnapshot) {
+        print("read");
+        for(int j = 0; j < documentSnapshot["Like"].length; j++){
+          print(documentSnapshot["Like"][j]);
+          print(uid);
+          if(documentSnapshot["Like"][j] == uid){
+            can_chat.add(Likeusers[i]);
+            can_chat_nick.add(documentSnapshot["Nickname"]);
+          }
+        }
+        print("suc");
+        print(can_chat);
+      });
+
+    }
+  }
 
 }
