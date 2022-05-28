@@ -56,7 +56,8 @@ class LoginPageState extends State<LoginPage> {
     //(데이터가 없을때는 null을 반환을 합니다.)
     userInfo = (await storage.read(key: "login"))!;
     print(userInfo);
-
+    final User? user = FirebaseAuth.instance.currentUser;
+    uid = user?.uid;
     //user의 정보가 있다면 바로 로그아웃 페이지로 넝어가게 합니다.
     if (userInfo != null) {
       Navigator.pop(context);
@@ -105,6 +106,8 @@ class LoginPageState extends State<LoginPage> {
 
     String? user_id = user_?.uid;
     String? useremail = user_?.email;
+
+    uid = user_id;
 
     final userCollectionReference = FirebaseFirestore.instance.collection("User_Data").doc(user_?.uid);
 
@@ -192,7 +195,9 @@ class LoginPageState extends State<LoginPage> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         children: <Widget>[
-          SizedBox(height: (MediaQuery.of(context).size.height) * 0.25,),
+          SizedBox(height: (MediaQuery.of(context).size.height) * 0.05,),
+          Image(image: AssetImage("assets/LookForSignIn.png")),
+          SizedBox(height: (MediaQuery.of(context).size.height) * 0.05,),
           SizedBox(
             height: 44,
             width: (MediaQuery.of(context).size.width) * 0.9,

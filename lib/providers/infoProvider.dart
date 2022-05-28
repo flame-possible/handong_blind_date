@@ -7,8 +7,8 @@ class InfoProvider with ChangeNotifier{
 
   final List<String> _validateList = ['학생증 첨부', '졸업 증명서 첨부'];
   String? _validateValue = '학생증 첨부';
-  final List<String> _genderList = ['남', '여'];
-  String? _genderValue = '남';
+  final List<String> _genderList = ['남자', '여자'];
+  String? _genderValue = '남자';
   final List<String> _stateList = ['재학생', '졸업생', '휴학생'];
   String? _stateValue = '재학생';
 
@@ -62,7 +62,7 @@ class InfoProvider with ChangeNotifier{
   }
 
   void bdaySelect(DateTime selected){
-    _birthday=selected.toString();
+    _birthday=DateFormat('yy-MM-dd').format(selected).toString();
     notifyListeners();
   }
 

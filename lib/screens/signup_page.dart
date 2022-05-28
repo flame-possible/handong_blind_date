@@ -12,6 +12,7 @@ import 'package:final_project/providers/naviProvider.dart';
 
 import 'navigator.dart';
 
+
 class SignUpPage extends StatelessWidget {
   late InfoProvider _infoProvider;
   late NaviProvider _naviProvider;
@@ -46,6 +47,7 @@ class SignUpPage extends StatelessWidget {
                   )),
             ),
             SizedBox(height: 34),
+/*
             Text('닉네임',
                 style: TextStyle(
                   fontSize: 13.0,
@@ -62,6 +64,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 )),
             SizedBox(height: 34),
+ */
             Text('생년월일',
                 style: TextStyle(
                   fontSize: 13.0,
@@ -100,6 +103,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 )),
             SizedBox(height: 34),
+/*
             Text('성별',
                 style: TextStyle(
                   fontSize: 13.0,
@@ -121,6 +125,7 @@ class SignUpPage extends StatelessWidget {
                   }).toList(),
                 )),
             SizedBox(height: 34),
+*/
             Text('휴대폰 번호',
                 style: TextStyle(
                   fontSize: 13.0,
@@ -137,6 +142,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                 )),
             SizedBox(height: 34),
+/*
             Text('재학상태',
                 style: TextStyle(
                   fontSize: 13.0,
@@ -157,6 +163,7 @@ class SignUpPage extends StatelessWidget {
                   }).toList(),
                 )),
             SizedBox(height: 34),
+ */
             SizedBox(
               height: 44,
               width: (MediaQuery.of(context).size.width) * 0.9,
@@ -241,15 +248,14 @@ class SignUpPage extends StatelessWidget {
   }
 
   Future pickDate(BuildContext context) async {
-    final newDate = await showDatePicker(
+    Future<DateTime?> newDate = showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime(DateTime.now().year),
       firstDate: DateTime(DateTime.now().year - 40),
       lastDate: DateTime(DateTime.now().year),
     );
-    if (newDate == null)
-      print("error");
-    else
-      _infoProvider.bdaySelect(newDate);
+    newDate.then((date){
+      _infoProvider.bdaySelect(date!);
+    });
   }
 }

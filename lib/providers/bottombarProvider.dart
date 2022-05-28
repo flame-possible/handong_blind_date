@@ -14,6 +14,7 @@ class BottomBarProvider with ChangeNotifier{
   Future<void> selectIndex(int index) async {
 
     _selectedIndex = index;
+
     print(selectedIndex);
     notifyListeners();
   }

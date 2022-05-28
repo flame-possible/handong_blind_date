@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'profileInfoProvider.dart';
+
+import 'dart:io';
 
 /// 프로필의 각 속성별 값을 앱 내에 저장하도록 하는 것은 좋지 않다.
 /// 로컬 저장소에 값을 저장해놓는 방법을 구현해야하기 떼문이다.
@@ -38,17 +42,38 @@ class ProfileProvider with ChangeNotifier {
   }
 
   void getProfileImage() {
-    _profileImage.add(
-        "http://www.urbanbrush.net/web/wp-content/uploads/edd/2018/04/web-20180403145227599865.png");
-    _profileImage.add(
-        "https://t1.daumcdn.net/liveboard/interstella-story/32f3dbb7f8434c4383c01f1bf253986d.jpg");
-    _profileImage.add(
-        "https://img5.yna.co.kr/photo/cms/2020/03/18/38/PCM20200318000038005_P4.jpg");
+
+    List<String>? temp = ['https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Photo.png',
+      'https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Photo.png',
+      'https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Photo.png'];
+
+    print("read");
+    DocumentReference docref =
+    FirebaseFirestore.instance.collection('User_Data').doc(FirebaseAuth.instance.currentUser?.uid);
+    docref.get().then((DocumentSnapshot documentSnapshot) {
+      print("read");
+      _profileImage[0] = documentSnapshot["Profile_Pic"][0];
+      _profileImage[1] = documentSnapshot["Profile_Pic"][1];
+      _profileImage[2] = documentSnapshot["Profile_Pic"][2];
+      print("suc");
+    });
+
+    // print(temp);
+    //
+    // _profileImage.add(
+    //     temp![0]);
+    // print(temp[0]);
+    // _profileImage.add(
+    //     temp![1]);
+    // print(temp[1]);
+    // _profileImage.add(
+    //     temp![2]);
+    // print(temp[2]);
     print("실행됨");
   }
 
   // 큰 범주의 속성별로 딕셔너리 자료형을만들고 해당 범주의 세부 속성별로를 인덱스를 구분하도록 한다.
-  List<String> _profileImage = [];
+  List<String> _profileImage = ['', '', ''];
   List<String> get profileImage => _profileImage;
 
   // 1. 유저 기본 정보

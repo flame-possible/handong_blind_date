@@ -1,14 +1,24 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 
 import '../../providers/matchingProvider.dart';
+import 'home_page.dart';
 
 class MatchingPage extends StatelessWidget {
   MatchingPage({Key? key}) : super(key: key);
 
   late MatchingProvider _matchingProvider;
+
+  int partner_cnt = 0;
+
+  List<String> Likeusers = [];
+  List<String> Dislikeusers = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +32,7 @@ class MatchingPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              print(allData);
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back),
@@ -101,7 +112,7 @@ class MatchingPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * (65 / 100),
                 color: Colors.white,
                 child: SwipableStack(
-                  itemCount: 3,
+                  itemCount: allData == null ? 0 : allData.length,
                   stackClipBehaviour: Clip.none,
                   //스와이핑 가능 방향을 제한한다.
                   onWillMoveNext: (index, direction) {
@@ -116,8 +127,22 @@ class MatchingPage extends StatelessWidget {
                   // 카드의 회전축이 바닥이 되도록 한다.
                   swipeAnchor: SwipeAnchor.bottom,
                   onSwipeCompleted: (index, direction) {
-                    _matchingProvider.matchingResult(index, direction);
-                    if (index == 2) {
+
+                    _matchingProvider.matchingResult(index, direction, allData[index], Likeusers, Dislikeusers);
+
+                    partner_cnt++;
+                    if (index == allData.length - 1) {
+
+                      var data = {
+                        'Like': Likeusers,
+                        'Dislike': Dislikeusers
+                      };
+                      DocumentReference docref = FirebaseFirestore.instance
+                          .collection('User_Data')
+                          .doc(FirebaseAuth.instance.currentUser?.uid);
+                      docref.set(data, SetOptions(merge: true));
+
+
                       CoolAlert.show(
                         context: context,
                         width: MediaQuery.of(context).size.width * (60 / 100),
@@ -158,6 +183,7 @@ class MatchingPage extends StatelessWidget {
                         child: Column(
                           children: [
                             //사진을 담기 위한 컨테이너이다. 컨테이너의 크기는 (상위컨테이너 너비)-(패딩 너비)이다.
+
                             Container(
                               width: MediaQuery.of(context).size.width *
                                   (75 / 100),
@@ -165,8 +191,84 @@ class MatchingPage extends StatelessWidget {
                                   (75 / 100),
                               color: Colors.cyan,
                               alignment: Alignment.center,
-                              child: Text("사진"),
+                              child: Image.network(partners_pic[partner_cnt]),
                             ),
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 3,
+                                    fit: FlexFit.tight,
+                                    child: Text("나이"),
+                                  ),
+                                  Flexible(
+                                    flex: 5,
+                                    fit: FlexFit.tight,
+                                    child: Text(partners_info[partner_cnt][0],
+                                      style:
+                                      const TextStyle(color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 3,
+                                    fit: FlexFit.tight,
+                                    child: Text("성별"),
+                                  ),
+                                  Flexible(
+                                    flex: 5,
+                                    fit: FlexFit.tight,
+                                    child: Text(partners_info[partner_cnt][1],
+                                      style:
+                                      const TextStyle(color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 3,
+                                    fit: FlexFit.tight,
+                                    child: Text("학적"),
+                                  ),
+                                  Flexible(
+                                    flex: 5,
+                                    fit: FlexFit.tight,
+                                    child: Text(partners_info[partner_cnt][2],
+                                      style:
+                                      const TextStyle(color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 3,
+                                    fit: FlexFit.tight,
+                                    child: Text("닉네임"),
+                                  ),
+                                  Flexible(
+                                    flex: 5,
+                                    fit: FlexFit.tight,
+                                    child: Text(partners_info[partner_cnt][3],
+                                      style:
+                                      const TextStyle(color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -180,4 +282,6 @@ class MatchingPage extends StatelessWidget {
       ),
     );
   }
+
+
 }

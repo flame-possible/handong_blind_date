@@ -6,6 +6,8 @@ import 'package:final_project/providers/matchingInfoProvider.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../login_page.dart';
+import 'package:toast/toast.dart';
+
 
 class MatchingInfo extends StatelessWidget {
   MatchingInfo({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class MatchingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _matchingInfoProvider = Provider.of<MatchingInfoProvider>(context);
+    ToastContext().init(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +27,7 @@ class MatchingInfo extends StatelessWidget {
           IconButton(
             onPressed: () {
               updateMatchingInfo();
-              print("저장되었습니다");
+              Toast.show("정보가 업데이트 되었습니다!", duration: Toast.lengthShort, gravity:  Toast.bottom);
             },
             icon: const Icon(Icons.save),
             color: Colors.black,
@@ -166,23 +169,23 @@ class MatchingInfo extends StatelessWidget {
   }
 
   Padding sectionTitle(String title) => Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 0, 15),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.fromLTRB(20, 0, 0, 15),
+    child: Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
 
   Card selectCard(
-          String propertyName,
-          List initialList,
-          List selectedValue,
-          List itemList,
-          List<MultiSelectItem<Object?>> propertyItemList,
-          Function(List<Object?>) functionName) =>
+      String propertyName,
+      List initialList,
+      List selectedValue,
+      List itemList,
+      List<MultiSelectItem<Object?>> propertyItemList,
+      Function(List<Object?>) functionName) =>
       Card(
         elevation: 0,
         color: Color(0xffF8F8F8),
@@ -194,9 +197,9 @@ class MatchingInfo extends StatelessWidget {
                   fit: FlexFit.tight,
                   flex: 5,
                   child: MultiSelectChipField(
-                      initialValue: initialList.isNotEmpty
-                          ? initialList
-                          : [itemList[0]],
+                      initialValue: initialList.isEmpty
+                          ? [itemList[0]]
+                          : initialList,
                       scroll: false,
                       title: Text(
                         propertyName,
@@ -220,6 +223,16 @@ class MatchingInfo extends StatelessWidget {
                       items: propertyItemList,
                       selectedChipColor: const Color(0x6dff8383),
                       onTap: (List<Object?> values) {
+                        if (values.isEmpty) {
+                          values.add(itemList[0]);
+                        }
+                        else if (values.last == itemList[0]) {
+                          values.clear();
+                          values.add(itemList[0]);
+                        }
+                        else if (values.length > 1 && values.first == itemList[0]) {
+                          values.removeAt(0);
+                        }
                         functionName(values);
                       })),
             ],
