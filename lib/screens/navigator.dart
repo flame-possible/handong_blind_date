@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../ChatListPage.dart';
 import 'login_page.dart';
 import 'package:final_project/providers/bottombarProvider.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart' as sb;
 
+import 'navigator/chatScreen/ChatListPage.dart';
 import 'navigator/home_page.dart';
 import 'navigator/notification_page.dart';
 

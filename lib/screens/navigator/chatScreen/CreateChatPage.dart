@@ -4,6 +4,7 @@ import 'package:sendbird_sdk/sendbird_sdk.dart';
 
 import 'ChatroomPage.dart';
 
+
 class CreateChatPage extends StatefulWidget {
   const CreateChatPage({Key? key}) : super(key: key);
 
@@ -80,7 +81,7 @@ class _CreateChatPageState extends State<CreateChatPage> {
               return;
             }
             createChannel(
-                    [for (final user in _selectedUsers.toList()) user.userId])
+                [for (final user in _selectedUsers.toList()) user.userId])
                 .then((channel) {
               Navigator.pushReplacement(
                 context,
@@ -133,14 +134,14 @@ class _CreateChatPageState extends State<CreateChatPage> {
             },
             secondary: (profUrl != null && profUrl.isEmpty)
                 ? CircleAvatar(
-                    child: Text(
-                    (user.nickname.isEmpty ? user.userId : user.nickname)
-                        .substring(0, 1)
-                        .toUpperCase(),
-                  ))
+                child: Text(
+                  (user.nickname.isEmpty ? user.userId : user.nickname)
+                      .substring(0, 1)
+                      .toUpperCase(),
+                ))
                 : CircleAvatar(
-                    backgroundImage: NetworkImage(profUrl!),
-                  ),
+              backgroundImage: NetworkImage(profUrl!),
+            ),
           );
         });
   }

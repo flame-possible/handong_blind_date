@@ -53,9 +53,10 @@ class _ChatroomPageState extends State<ChatroomPage> with ChannelEventHandler {
     );
   }
 
+  bool isOn = true;
   AppBar navigationBar(GroupChannel channel) {
     Member member = channel.members.firstWhere(
-        (element) => element.userId != SendbirdSdk().currentUser?.userId);
+            (element) => element.userId != SendbirdSdk().currentUser?.userId);
 
     return AppBar(
       automaticallyImplyLeading: true,
@@ -76,6 +77,7 @@ class _ChatroomPageState extends State<ChatroomPage> with ChannelEventHandler {
             itemBuilder: (context) => [
               PopupMenuItem(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text("Question suggestions"),
                     Text("1. ..."),
@@ -91,11 +93,19 @@ class _ChatroomPageState extends State<ChatroomPage> with ChannelEventHandler {
         SizedBox(
           width: 40,
           child: TextButton(
-            onPressed: () {
-              print("clicked");
-            },
-            child: Icon(Icons.notifications, color: Colors.black),
-          ),
+              onPressed: () {
+                print("clicked");
+                setState(() {
+                  isOn = !isOn;
+                  print(isOn);
+                  //알림 기능과 연동
+                });
+              },
+              child: isOn
+                  ? const Icon(Icons.notifications_outlined,
+                  color: Colors.black)
+                  : const Icon(Icons.notifications_off_outlined,
+                  color: Colors.black)),
         ),
         // 나가기 버튼
         SizedBox(
@@ -123,7 +133,7 @@ class _ChatroomPageState extends State<ChatroomPage> with ChannelEventHandler {
         key: Key(widget.channel.channelUrl),
         onSend: (ChatMessage message) async {
           var sentMessage =
-              widget.channel.sendUserMessageWithText(message.text!);
+          widget.channel.sendUserMessageWithText(message.text!);
           setState(() {
             _messages.add(sentMessage);
           });
@@ -133,7 +143,6 @@ class _ChatroomPageState extends State<ChatroomPage> with ChannelEventHandler {
         user: user,
         messages: asDashChatMessages(_messages),
         inputDecoration: const InputDecoration(
-            hintText: "Enter a message",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),

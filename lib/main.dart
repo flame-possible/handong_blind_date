@@ -7,6 +7,7 @@ import 'package:final_project/providers/naviProvider.dart';
 import 'package:final_project/providers/profileProvider.dart';
 import 'package:final_project/providers/profileInfoProvider.dart';
 import 'package:final_project/screens/navigator.dart';
+import 'package:final_project/screens/navigator/chatScreen/ChatListPage.dart';
 import 'package:final_project/screens/navigator/setting_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,8 +20,9 @@ import 'package:final_project/screens/login_navi.dart';
 import 'package:final_project/screens/login_page.dart';
 import 'package:final_project/screens/signup_page.dart';
 
-import 'ChatListPage.dart';
-import 'CreateChatPage.dart';
+import 'screens/navigator/chatScreen/ChatListPage.dart';
+import 'screens/navigator/chatScreen/CreateChatPage.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
