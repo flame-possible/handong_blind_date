@@ -1,10 +1,12 @@
 import 'package:final_project/providers/profileProvider.dart';
+import 'package:final_project/screens/navigator/home_page.dart';
 import 'package:final_project/screens/navigator/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart';
 
+import '../../login_page.dart';
 import 'ChatroomPage.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -128,7 +130,7 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text("Start matching and find a partner to chat!"),
-              startChat(matchedList),
+              startChat(),
             ],
           );
         }
@@ -181,7 +183,7 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
                             //TODO 지금은 nickname이 비어있는데, 나중에는 보이도록 바꿔야 함
                               member.nickname.isNotEmpty
                                   ? member.nickname
-                                  : "The member left the chat",
+                                  : "Welcome",
                               style: const TextStyle(fontSize: 20)),
                           trailing: noMessages
                               ? Column(
@@ -220,7 +222,7 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
               Flexible(
                 fit: FlexFit.loose,
                 flex: 2,
-                child: startChat(matchedList),
+                child: startChat(),
               ),
             ],
           ),
@@ -257,10 +259,10 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
    */
   List<String> matchedList = ["y5jRmEftFCgNPvn9vu3rAzt2t3H3", "193895"];
 
-  Container startChat(List<String> matched) {
+  Container startChat() {
     return Container(
       child: ListView.builder(
-          itemCount: matched.length,
+          itemCount: can_chat.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.fromLTRB(
@@ -281,7 +283,7 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                     tileColor: Colors.grey[400],
                     title: Text(
-                      "타일을 탭하여 \n${matched[index]}\n님과 채팅을 시작하세요",
+                      "타일을 탭하여 \n${can_chat_nick[index]}\n님과 채팅을 시작하세요",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: Colors.white,
@@ -291,11 +293,11 @@ class _ChatListPageState extends State<ChatListPage> with ChannelEventHandler {
                   onTap: () {
                     List<String> temp = [
                       //상대 UserId
-                      matched[index],
+                      can_chat[index],
                       //내 UserId 입니다. 로그인 하시는 분에 따라 달라져야합니다.
-                      "Gejcz9rL2IXK2UK55m4IVadrHYD2"
+                      uid
                     ];
-                    matched.removeAt(index);
+                    can_chat.removeAt(index);
                     createChannel(temp);
                   },
                 ),

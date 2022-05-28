@@ -18,6 +18,9 @@ late List<String> allData;
 List<List<dynamic>> partners_info = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']];
 List<dynamic> partners_pic = ['', '', '', '', ''];
 
+List<dynamic> can_chat = []; //['', '', '', '', ''];
+List<dynamic> can_chat_nick = []; //['', '', '', '', ''];
+
 class HomePage extends StatefulWidget {
 
   HomePage({Key? key}) : super(key: key);

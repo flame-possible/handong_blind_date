@@ -1,8 +1,4 @@
-assets/sendbird-id.txt
-<<<<<<< HEAD
-=======
 
->>>>>>> 6796d600f8083f16d2825207e3884b42bd9607c2
 # Miscellaneous
 *.class
 *.log
@@ -36,6 +32,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+assets/sendbird-id.txt
 
 # Web related
 lib/generated_plugin_registrant.dart
